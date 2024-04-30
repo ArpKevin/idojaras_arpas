@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ListBoxHoverAttributes
+namespace idojaras_arpas
 {
     public partial class MainWindow : Window
     {
