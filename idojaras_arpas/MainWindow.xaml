@@ -24,7 +24,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="200"
+        <ListBox x:Name="varosok" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="200"
                  ItemsSource="{Binding Items}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -33,5 +33,11 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock x:Name="attributeTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,10,0,0"/>
+        <Button x:Name="btn_hozzaad" Content="Hozzáadás" HorizontalAlignment="Left" Margin="472,279,0,0" VerticalAlignment="Top" Padding="5,5,5,5" ScrollViewer.CanContentScroll="True" Click="btn_hozzaad_Click" Height="53" Width="110" FontSize="18"/>
+        <Button x:Name="btn_torol" Content="Törlés" HorizontalAlignment="Left" Margin="632,279,0,0" VerticalAlignment="Top" Padding="5,5,5,5" Height="53" Width="110" FontSize="18" Click="btn_torol_Click"/>
+        <TextBox x:Name="textbox_varos" HorizontalAlignment="Left" Margin="523,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164" Height="36" FontSize="15"/>
+        <TextBox x:Name="textbox_homerseklet" HorizontalAlignment="Left" Margin="523,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164" Height="36" FontSize="15"/>
+        <TextBox x:Name="textbox_paratartalom" HorizontalAlignment="Left" Margin="523,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164" Height="36" FontSize="15"/>
+        <TextBox x:Name="textbox_szelsebesseg" HorizontalAlignment="Left" Margin="523,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164" Height="36" FontSize="15"/>
     </Grid>
 </Window>

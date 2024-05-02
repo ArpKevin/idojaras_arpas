@@ -13,43 +13,67 @@ namespace idojaras_arpas
             InitializeComponent();
             DataContext = this;
 
+            varosok.SelectionChanged += varosok_SelectionChanged;
+            btn_torol.IsEnabled = false;
+
             // Sample data
             Items = new ObservableCollection<Item>
             {
-                new Item { Name = "Item 1", Attribute1 = "Attribute 1 Value", Attribute2 = "Attribute 2 Value", Attribute3 = "Attribute 3 Value" },
-                new Item { Name = "Item 2", Attribute1 = "Attribute 4 Value", Attribute2 = "Attribute 2 Value", Attribute3 = "Attribute 3 Value" },
-                new Item { Name = "Item 3", Attribute1 = "Attribute 5 Value", Attribute2 = "Attribute 2 Value", Attribute3 = "Attribute 3 Value" }
+                new Item { Name = "New York", Temperature = "25", Humidity = "65", WindSpeed = "10" },
+                new Item { Name = "London", Temperature = "18", Humidity = "70", WindSpeed = "12" },
+                new Item { Name = "Tokyo", Temperature = "30", Humidity = "80", WindSpeed = "8" }
             };
 
-            listBox.ItemsSource = Items;
-            listBox.SelectionChanged += ListBox_SelectionChanged;
-        }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (listBox.SelectedItem != null)
-            {
-                UpdateAttributeText();
-            }
+            varosok.ItemsSource = Items;
+            varosok.SelectionChanged += (sender, e) => { if (varosok.SelectedItem != null) UpdateAttributeText(); };
         }
-
         private void UpdateAttributeText()
         {
-            if (listBox.SelectedItem != null)
+            if (varosok.SelectedItem != null)
             {
-                Item selectedItem = (Item)listBox.SelectedItem;
-                attributeTextBlock.Text = $"Attribute 1: {selectedItem.Attribute1}\n" +
-                                          $"Attribute 2: {selectedItem.Attribute2}\n" +
-                                          $"Attribute 3: {selectedItem.Attribute3}";
+                Item selectedItem = (Item)varosok.SelectedItem;
+                attributeTextBlock.Text = $"Hőmérséklet: {selectedItem.Temperature} °C\n" +
+                                          $"Páratartalom: {selectedItem.Humidity} g/m^3 \n" +
+                                          $"Szélsebesség: {selectedItem.WindSpeed} km/h";
             }
+        }
+
+        private void btn_hozzaad_Click(object sender, RoutedEventArgs e)
+        {
+            (string varos, string homerseklet, string paratartalom, string szelsebesseg) = (
+                textbox_varos.Text,
+                textbox_homerseklet.Text,
+                textbox_paratartalom.Text,
+                textbox_szelsebesseg.Text
+            );
+
+            if (!string.IsNullOrWhiteSpace(varos) &&
+                !string.IsNullOrWhiteSpace(homerseklet) &&
+                !string.IsNullOrWhiteSpace(paratartalom) &&
+                !string.IsNullOrWhiteSpace(szelsebesseg)
+                )
+            {
+                Items.Add(new Item { Name = varos, Temperature = homerseklet, Humidity = paratartalom, WindSpeed = szelsebesseg });
+            }
+        }
+
+        private void btn_torol_Click(object sender, RoutedEventArgs e)
+        {
+            varosok.Items.Remove(varosok.SelectedItem);
+        }
+
+        private void varosok_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btn_torol.IsEnabled = varosok.SelectedItem != null;
         }
     }
 
     public class Item
     {
         public string Name { get; set; }
-        public string Attribute1 { get; set; }
-        public string Attribute2 { get; set; }
-        public string Attribute3 { get; set; }
+        public string Temperature { get; set; }
+        public string Humidity { get; set; }
+        public string WindSpeed { get; set; }
     }
 }
