@@ -5,27 +5,18 @@
         Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="ListBoxItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="Border" Padding="2" Margin="2" BorderThickness="1" BorderBrush="Gray"
-                                Background="White" CornerRadius="3">
-                            <TextBlock Text="{Binding Name}" Margin="5"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="LightGray"/>
-                                <Setter TargetName="Border" Property="BorderBrush" Value="Black"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>
         <ListBox x:Name="varosok" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="200"
-                 ItemsSource="{Binding Items}">
+                 ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>
@@ -39,5 +30,6 @@
         <TextBox x:Name="textbox_homerseklet" HorizontalAlignment="Left" Margin="523,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164" Height="36" FontSize="15"/>
         <TextBox x:Name="textbox_paratartalom" HorizontalAlignment="Left" Margin="523,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164" Height="36" FontSize="15"/>
         <TextBox x:Name="textbox_szelsebesseg" HorizontalAlignment="Left" Margin="523,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164" Height="36" FontSize="15"/>
+        <Label x:Name="lblError" HorizontalAlignment="Left" Margin="446,29,0,0" VerticalAlignment="Top" Width="318" Foreground="Red" Height="42" FontSize="14" HorizontalContentAlignment="Center" Visibility="Collapsed"/>
     </Grid>
 </Window>

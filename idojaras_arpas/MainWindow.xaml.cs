@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace idojaras_arpas
 {
@@ -8,21 +10,30 @@ namespace idojaras_arpas
     {
         public ObservableCollection<Item> Items { get; set; }
 
+
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
 
+            var data = File.ReadAllLines(@"..\..\..\src\data.txt");
+
+            Items = new ObservableCollection<Item>();
+
+            foreach (var item in data)
+            {
+                var d = item.Split(";");
+
+                string name = d[1];
+                int temp = int.Parse(d[2]);
+                int humidity = int.Parse(d[3]);
+                int windSpeed = int.Parse(d[4]);
+
+                Items.Add(new Item(name, temp, humidity, windSpeed));
+            }
+
             varosok.SelectionChanged += varosok_SelectionChanged;
             btn_torol.IsEnabled = false;
-
-            // Sample data
-            Items = new ObservableCollection<Item>
-            {
-                new Item { Name = "New York", Temperature = "25", Humidity = "65", WindSpeed = "10" },
-                new Item { Name = "London", Temperature = "18", Humidity = "70", WindSpeed = "12" },
-                new Item { Name = "Tokyo", Temperature = "30", Humidity = "80", WindSpeed = "8" }
-            };
 
 
             varosok.ItemsSource = Items;
@@ -54,7 +65,34 @@ namespace idojaras_arpas
                 !string.IsNullOrWhiteSpace(szelsebesseg)
                 )
             {
-                Items.Add(new Item { Name = varos, Temperature = homerseklet, Humidity = paratartalom, WindSpeed = szelsebesseg });
+                int temperature, humidity, windSpeed;
+
+                if (int.TryParse(homerseklet, out temperature) &&
+                    int.TryParse(paratartalom, out humidity) &&
+                    int.TryParse(szelsebesseg, out windSpeed))
+                {
+                    Items.Add(new Item(varos, temperature, humidity, windSpeed));
+
+                    textbox_varos.Clear();
+                    textbox_homerseklet.Clear();
+                    textbox_paratartalom.Clear();
+                    textbox_szelsebesseg.Clear();
+
+                    if (lblError.Visibility == Visibility.Visible)
+                    {
+                        lblError.Visibility = Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    lblError.Visibility = Visibility.Visible;
+                    lblError.Content = "A megadott adatok valamelyike hibás!";
+                }
+            }
+            else
+            {
+                lblError.Visibility = Visibility.Visible;
+                lblError.Content = "Hiba! Nem maradhat egyik mező sem üresen.";
             }
         }
 
@@ -69,13 +107,5 @@ namespace idojaras_arpas
         {
             btn_torol.IsEnabled = varosok.SelectedItem != null;
         }
-    }
-
-    public class Item
-    {
-        public string Name { get; set; }
-        public string Temperature { get; set; }
-        public string Humidity { get; set; }
-        public string WindSpeed { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+1;New York;25;65;10
+2;London;18;70;12
+3;Tokyo;30;80;8
+4;Paris;20;75;11
+5;Los Angeles;28;68;9
+6;Berlin;22;72;11
+7;Sydney;26;77;10
+8;Rome;21;73;12
+9;Beijing;29;79;9
+10;Moscow;23;71;11
+11;Toronto;24;66;10
+12;Madrid;19;74;11
+13;Seoul;27;78;9
+14;Dubai;31;81;8
+15;Mumbai;32;82;7
+16;Budapest;33;83;6
+17;Shanghai;34;84;5
+18;Mexico City;35;85;4
+19;Bangkok;36;86;3
+20;Istanbul;37;87;2
+21;Singapore;38;88;1
+22;Hong Kong;39;89;2
+23;Amsterdam;40;90;3
+24;Vienna;41;91;4
+25;Athens;42;92;5
+26;Stockholm;43;93;6
+27;Copenhagen;44;94;7
+28;Oslo;45;95;8
+29;Helsinki;46;96;9
+30;Dublin;47;97;10
+31;Budapest;48;98;11
+32;Prague;49;99;12
+33;Warsaw;50;100;13
+34;Brussels;51;101;14
+35;Lisbon;52;102;15
+36;Kuala Lumpur;53;103;16
+37;Jakarta;54;104;17
+38;Manila;55;105;18
+39;New Delhi;56;106;19
+40;Cairo;57;107;20
+41;Bangalore;58;108;21
+42;Dublin;59;109;22
+43;Buenos Aires;60;110;23
+44;Vancouver;61;111;24
+45;San Francisco;62;112;25
+46;Chicago;63;113;26
+47;Seattle;64;114;27
+48;Miami;65;115;28
+49;Boston;66;116;29
+50;Houston;67;117;30
