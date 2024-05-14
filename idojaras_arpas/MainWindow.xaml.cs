@@ -42,10 +42,10 @@ namespace idojaras_arpas
         private void btn_hozzaad_Click(object sender, RoutedEventArgs e)
         {
             (string varos, string homerseklet, string paratartalom, string szelsebesseg) = (
-                textbox_varos.Text,
-                textbox_homerseklet.Text,
-                textbox_paratartalom.Text,
-                textbox_szelsebesseg.Text
+                textbox_varos.Text.Trim(),
+                textbox_homerseklet.Text.Trim(),
+                textbox_paratartalom.Text.Trim(),
+                textbox_szelsebesseg.Text.Trim()
             );
 
             if (!string.IsNullOrWhiteSpace(varos) &&
@@ -60,7 +60,9 @@ namespace idojaras_arpas
 
         private void btn_torol_Click(object sender, RoutedEventArgs e)
         {
-            varosok.Items.Remove(varosok.SelectedItem);
+           
+            Items.Remove((Item)varosok.SelectedItem); // varosok.Items.Remove((Item)varosok.SelectedItem); incompatible
+            attributeTextBlock.Text = "";
         }
 
         private void varosok_SelectionChanged(object sender, SelectionChangedEventArgs e)
